@@ -587,7 +587,7 @@ fun ApiKeyBannerCard(onOpenSettings: () -> Unit) {
                     fontWeight = FontWeight.Bold
                 )
                 Text(
-                    text = "Tap to enter your free OpenWeatherMap API key to enable live weather fetching.",
+                    text = "Tap to enter your FREE OpenWeatherMap API key. Standard free accounts on openweathermap.org are fully supported.",
                     style = MaterialTheme.typography.bodySmall
                 )
             }
@@ -608,11 +608,15 @@ fun ApiKeyDialog(
 
     AlertDialog(
         onDismissRequest = onDismiss,
-        title = { Text("OpenWeatherMap API Key") },
+        title = { Text("OpenWeatherMap Free API Key") },
         text = {
             Column {
                 Text(
-                    text = "Enter your OpenWeatherMap API key. You can get a free API key at openweathermap.org",
+                    text = "Supports 100% Free Tier API keys from openweathermap.org.\n\n" +
+                            "• Current Weather API (Free)\n" +
+                            "• Air Pollution / AQI API (Free)\n" +
+                            "• UV Index Estimation (Free Fallback included)\n\n" +
+                            "Note: Newly generated free API keys can take 10-15 minutes to activate on OpenWeatherMap servers.",
                     style = MaterialTheme.typography.bodyMedium
                 )
                 Spacer(modifier = Modifier.height(12.dp))

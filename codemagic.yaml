@@ -1,12 +1,10 @@
 workflows:
-  android-manual-build:
-    name: Android Manual Build
-
+  android-build:
+    name: Android Glanceable Weather Build
+    max_build_duration: 30
+    instance_type: mac_mini_m1
     environment:
       java: 17
-      android_signing:
-        - infinity_keystore
-
     triggering:
       events:
         - push
@@ -16,15 +14,27 @@ workflows:
           source: true
 
     scripts:
+      - name: Set Android SDK location
+        script: |
+          echo "sdk.dir=$ANDROID_SDK_ROOT" > local.properties
+
       - name: Make gradlew executable
         script: chmod +x ./gradlew
 
-      - name: Build release APK
+      - name: Run Unit Tests
         script: |
-          ./gradlew assembleRelease
-          
-          echo "Build version: $(grep "versionName" app/build.gradle | awk '{print $2}' | tr -d '\"')"
-          echo "Build code: $(grep "versionCode" app/build.gradle | awk '{print $2}')"
+          ./gradlew test --no-daemon
+
+      - name: Build APKs
+        script: |
+          ./gradlew assembleDebug assembleRelease --no-daemon
+
+      - name: Print Version Info
+        script: |
+          VERSION_NAME=$(grep -E 'versionName\s*=' app/build.gradle.kts | awk -F '"' '{print $2}')
+          VERSION_CODE=$(grep -E 'versionCode\s*=' app/build.gradle.kts | awk -F '=' '{print $2}' | tr -d ' ')
+          echo "Build Version Name: $VERSION_NAME"
+          echo "Build Version Code: $VERSION_CODE"
 
     artifacts:
       - app/build/outputs/**/*.apk

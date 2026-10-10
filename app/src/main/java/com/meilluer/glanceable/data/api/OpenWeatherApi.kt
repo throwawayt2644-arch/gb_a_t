@@ -15,8 +15,14 @@ data class WeatherResponse(
     @SerializedName("weather") val weather: List<WeatherDescription>?,
     @SerializedName("main") val main: MainData?,
     @SerializedName("wind") val wind: WindData?,
+    @SerializedName("clouds") val clouds: CloudsData?,
+    @SerializedName("dt") val dt: Long?,
     @SerializedName("name") val name: String?,
     @SerializedName("sys") val sys: SysData?
+)
+
+data class CloudsData(
+    @SerializedName("all") val cloudiness: Int
 )
 
 data class Coord(
@@ -45,7 +51,9 @@ data class WindData(
 )
 
 data class SysData(
-    @SerializedName("country") val country: String?
+    @SerializedName("country") val country: String?,
+    @SerializedName("sunrise") val sunrise: Long?,
+    @SerializedName("sunset") val sunset: Long?
 )
 
 // Air Pollution / AQI Response
