@@ -1,7 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     // alias(libs.plugins.kotlin.android) // Remove explicit kotlin plugin due to AGP 9.0 conflict
-    // alias(libs.plugins.kotlin.compose)
+     alias(libs.plugins.kotlin.compose)
     // alias(libs.plugins.ksp)
 }
 
