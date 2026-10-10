@@ -7,7 +7,7 @@ plugins {
 
 android {
     namespace = "com.meilluer.glanceable"
-    compileSdk = 35
+    compileSdk = 37
 
     defaultConfig {
         applicationId = "com.meilluer.glanceable"
