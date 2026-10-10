@@ -1,8 +1,8 @@
 plugins {
     alias(libs.plugins.android.application)
-    alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.kotlin.compose)
-    alias(libs.plugins.ksp)
+    // alias(libs.plugins.kotlin.android) // Remove explicit kotlin plugin due to AGP 9.0 conflict
+    // alias(libs.plugins.kotlin.compose)
+    // alias(libs.plugins.ksp)
 }
 
 android {
@@ -32,9 +32,6 @@ android {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
-    kotlinOptions {
-        jvmTarget = "17"
-    }
     buildFeatures {
         compose = true
     }
@@ -59,7 +56,7 @@ dependencies {
     // Room
     implementation(libs.androidx.room.runtime)
     implementation(libs.androidx.room.ktx)
-    ksp(libs.androidx.room.compiler)
+    // ksp(libs.androidx.room.compiler)
 
     // Retrofit & OkHttp
     implementation(libs.retrofit)
